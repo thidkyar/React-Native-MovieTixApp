@@ -1,2 +1,6 @@
 # React-Native-MovieTixApp
-Movie ticket booking app on React Native
+React Native Practice Project 1.0
+ - Movie ticket booking app
+
+Current App State:
+![Current State](../sc1.png)
