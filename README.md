@@ -3,4 +3,4 @@ React Native Practice Project 1.0
  - Movie ticket booking app
 
 Current App State:
-![Current State](../sc1.png)
+![Current State](./images/sc1.png)
