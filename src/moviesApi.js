@@ -7,22 +7,41 @@ class MoviesApi extends Component {
         super(props);
         this.state = {
             modalVisible: false,
+            movieId: '',
+            movieData: {}
         };
         this._setModalVisible = this._setModalVisible.bind(this)
     }
 
-    _setModalVisible(visible) {
-        this.setState({modalVisible: visible});
+    _setModalVisible(visible, movieId) {
+        this.setState({modalVisible: visible, movieId: movieId});
+        this._movieData(movieId)
     }
 
+    _movieData = (movieId) => {
+        this.props.data.forEach((movie,index) => {
+          if (movie.id === movieId) {
+            this.setState({movieData: {
+                movie_id: movie.id,
+                title: movie.original_title,
+                image: "https://image.tmdb.org/t/p/w200"+ movie.poster_path,
+                overview: movie.overview,
+                rating: movie.vote_average,
+                release_date: movie.release_date}
+            })
+          }
+        })
+      }
+
     render() {
+        console.log(this.state.movieId)
         return (
                 <ScrollView contentContainerStyle={styles.scrollContent}>
                     {this.props.data.map((movie, index) => {
                         let image = "https://image.tmdb.org/t/p/w200"+ movie.poster_path;
                         return (
                             <TouchableOpacity key={movie.id} style={styles.content} onPress={() => {
-                                this._setModalVisible(true);
+                                this._setModalVisible(true,movie.id);
                               }}>
                                 <View key={movie.uniqueId} style={{flex: 1}}>
                                     <Image key={movie.uniqueId} style={styles.image} source={{uri: image}}/>
@@ -32,7 +51,7 @@ class MoviesApi extends Component {
                             </TouchableOpacity>
                         )
                     })}
-                    <MoviePopup modalVisible={this.state.modalVisible} _setModalVisible={this._setModalVisible} data={this.props.data}/>
+                    <MoviePopup modalVisible={this.state.modalVisible} _setModalVisible={this._setModalVisible} data={this.props.data} movieData={this.state.movieData}/>
                 </ScrollView>
         );
     }
@@ -50,7 +69,7 @@ const styles = StyleSheet.create({
     image: {
         width: 100,
         height: 200,
-        margin: 10
+        margin: 10,
     },
     content: {
         height: (height - 20 - 20) / rows - 10,
