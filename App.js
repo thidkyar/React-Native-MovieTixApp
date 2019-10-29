@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, StatusBar } from 'react-native';
 import MoviesApi from "./src/moviesApi.js"
 
 class App extends Component {
@@ -29,6 +29,7 @@ componentDidMount(){
 render() {
     return (
       <View style={styles.container}>
+        <StatusBar barStyle="light-content" />
         <MoviesApi data={this.state.data}/>
       </View>
     );

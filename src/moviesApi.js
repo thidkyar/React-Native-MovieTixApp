@@ -34,7 +34,6 @@ class MoviesApi extends Component {
       }
 
     render() {
-        console.log(this.state.movieId)
         return (
                 <ScrollView contentContainerStyle={styles.scrollContent}>
                     {this.props.data.map((movie, index) => {

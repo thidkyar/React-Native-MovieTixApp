@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Modal, Text, TouchableHighlight, View, Button, Image, StyleSheet} from 'react-native';
+import {Modal, Text, TouchableHighlight, View, Button, Image, StyleSheet, StatusBar} from 'react-native';
 
 class MoviePopup extends Component {
   constructor(props) {
@@ -15,9 +15,7 @@ class MoviePopup extends Component {
 
   render() {
     return (
-      <View style={{maxHeight: 50}}>
           <Modal
-            backgroundColor='#DDDDDD'
             animationType="slide"
             transparent={false}
             visible={this.props.modalVisible}
@@ -25,6 +23,7 @@ class MoviePopup extends Component {
               console.log('Modal has been closed.');
             }}>
               <View style={{marginTop: 22, marginLeft: 10}}>
+              <StatusBar barStyle="dark-content" />
                 <Image key={this.props.movie_id} style={styles.image} source={{uri: this.props.movieData.image}}/>
                 <Text>{this.props.movieData.title}</Text>
                 <Text>{this.props.movieData.overview}</Text>
@@ -33,7 +32,6 @@ class MoviePopup extends Component {
                 <Button onPress={()=>this.props._setModalVisible(false, this.props.movieData.movie_id)} title="Hide page"/>
               </View>
           </Modal>
-        </View>
     );
   }
 }
