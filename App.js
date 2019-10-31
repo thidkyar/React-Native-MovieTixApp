@@ -1,55 +1,34 @@
 import React, {Component} from 'react';
 import { Dimensions, StyleSheet, Text, View, StatusBar } from 'react-native';
-import MoviesApi from "./src/moviesApi.js"
+import Home from "./src/home.js"
+import AboutMe from "./src/aboutme.js"
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        data: [],
-        modalVisible: false,
-    };
-}
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import Icon from 'react-native-vector-icons/Ionicons'
 
-_fetchMovies = () => {
-  let url = "https://api.themoviedb.org/3/movie/now_playing?api_key=74bd71d1130d31841511eb1103ba1205"
-  fetch(url)
-      .then(res => res.json())
-      .then(result => {
-          let data = result.results
-          this.setState({data: data})
-      });
-}
-
-
-componentDidMount(){
-  this._fetchMovies();
-}
-
-render() {
-    return (
-      <View style={styles.container}>
-        <StatusBar barStyle="light-content" />
-        <MoviesApi data={this.state.data}/>
-      </View>
-    );
-  }
-}
-
-export default App;
-
-const { width, height } = Dimensions.get('window');
-const cols = 3, rows = 3;
-
-const styles = StyleSheet.create({
-  container: {
-    ...StyleSheet.absoluteFillObject,
-    flex: 1,
-    backgroundColor: 'black',
-    paddingTop: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexWrap: 'wrap', 
-    flexDirection: 'row',
+const TabNavigator = createBottomTabNavigator({
+  Home: {
+    screen: Home,
+    navigationOptions: {
+      tabBarLabel: 'Now Playing',
+      tabBarOptions: {
+        activeTintColor: '#e91e63',
+        labelStyle: {
+          fontSize: 12,
+        },
+        style: {
+          backgroundColor: 'black',
+          borderTopColor: "transparent"
+        },
+        tabBarIcon: ({tintColor}) => (
+          <Icon name="ios-options" size={24}/>
+        )
+      }
+    }
   },
-});
+  AboutMe: {screen: AboutMe}
+},
+);
+
+export default createAppContainer(TabNavigator);
