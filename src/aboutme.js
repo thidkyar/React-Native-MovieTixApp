@@ -7,11 +7,24 @@ class AboutMe extends Component {
   }
 render() {
     return (
-        <View>
-            <Text>Hello</Text>
+        <View style={styles.container}>
+            <Text>PAGE INCOMPLETE</Text>
         </View>
     )
 }
 }
 
 export default AboutMe;
+
+const styles = StyleSheet.create({
+    container: {
+      ...StyleSheet.absoluteFillObject,
+      flex: 1,
+      paddingTop: 40,
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexWrap: 'wrap', 
+      flexDirection: 'row',
+    },
+  });
+  

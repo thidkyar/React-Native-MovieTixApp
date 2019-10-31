@@ -5,7 +5,7 @@ import AboutMe from "./src/aboutme.js"
 
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from '@expo/vector-icons/Ionicons'
 
 const TabNavigator = createBottomTabNavigator({
   Home: {
@@ -14,19 +14,22 @@ const TabNavigator = createBottomTabNavigator({
       tabBarLabel: 'Now Playing',
       tabBarOptions: {
         activeTintColor: '#e91e63',
-        labelStyle: {
-          fontSize: 12,
-        },
+        inactiveTintColor: 'gray',
+        showIcon: true,
         style: {
           backgroundColor: 'black',
           borderTopColor: "transparent"
         },
-        tabBarIcon: ({tintColor}) => (
-          <Icon name="ios-options" size={24}/>
+      },
+      tabBarIcon: ({ tintColor }) => (
+          <Icon
+            name="ios-videocam"
+            style={{ color: tintColor }}
+            size={24}
+          />
         )
-      }
-    }
-  },
+      },
+    },
   AboutMe: {screen: AboutMe}
 },
 );
